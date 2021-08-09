@@ -28,21 +28,21 @@ if [ ! -x "$(command -v nvcc)" ]; then
 fi
 
 # Numpy, PyCUDA, TensorFlow, cython-bbox
-sudo apt-get update
-sudo apt-get install -y python3-pip libhdf5-serial-dev hdf5-tools libcanberra-gtk-module
-sudo -H pip3 install cython
-sudo -H pip3 install numpy cython-bbox
-sudo ln -s /usr/include/locale.h /usr/include/xlocale.h
-sudo -H pip3 install --no-cache-dir --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v$JP_VERSION tensorflow==$TF_VERSION+nv$NV_VERSION
+apt-get update
+apt-get install -y python3-pip libhdf5-serial-dev hdf5-tools libcanberra-gtk-module
+pip3 install cython
+pip3 install numpy cython-bbox
+ln -s /usr/include/locale.h /usr/include/xlocale.h
+pip3 install --no-cache-dir --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v$JP_VERSION tensorflow==$TF_VERSION+nv$NV_VERSION
 
 # Scipy
-sudo apt-get install -y libatlas-base-dev gfortran
-sudo -H pip3 install scipy==1.5
+apt-get install -y libatlas-base-dev gfortran
+pip3 install scipy==1.5
 
 # Numba
-sudo apt-get install -y llvm-8 llvm-8-dev
-sudo -H LLVM_CONFIG=/usr/bin/llvm-config-8 pip3 install numba==0.48
+apt-get install -y llvm-8 llvm-8-dev
+LLVM_CONFIG=/usr/bin/llvm-config-8 pip3 install numba==0.48
 
 # CuPy
 echo "Installing CuPy, this may take a while..."
-sudo -H CUPY_NVCC_GENERATE_CODE="current" CUPY_NUM_BUILD_JOBS=$(nproc) pip3 install cupy==9.2
+CUPY_NVCC_GENERATE_CODE="current" CUPY_NUM_BUILD_JOBS=$(nproc) pip3 install cupy==9.2
